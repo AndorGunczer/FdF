@@ -6,13 +6,13 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:33:44 by agunczer          #+#    #+#             */
-/*   Updated: 2021/06/28 14:41:33 by agunczer         ###   ########.fr       */
+/*   Updated: 2021/08/05 18:43:00 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	numstring(char const *s1, char c)
+static int	numstring(char const *s1, char c) // numstring function bugged
 {
 	int	comp;
 	int	cles;
@@ -25,8 +25,9 @@ static int	numstring(char const *s1, char c)
 	{
 		if (*s1 == c)
 			cles = 0;
-		else if (cles == 0)
+		else if (cles == 0 && *s1 != '\n')
 		{
+			// printf("%c | ", *s1);
 			cles = 1;
 			comp++;
 		}

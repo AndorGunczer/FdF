@@ -6,21 +6,22 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 17:02:20 by agunczer          #+#    #+#             */
-/*   Updated: 2021/08/04 10:56:49 by agunczer         ###   ########.fr       */
+/*   Updated: 2021/08/05 18:36:04 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
-unsigned int	ft_strlen(const char *s)
-{
-	unsigned int	i;
+// unsigned int	ft_strlen(const char *s)
+// {
+// 	unsigned int	i;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (s[i] != '\0')
+// 		i++;
+// 	return (i);
+// }
 
 void	*gnl_calloc(unsigned int count, unsigned int size)
 {
@@ -111,11 +112,12 @@ char	*gnl_substr(char const *s, unsigned int start, unsigned int len)
 	}
 	while (i < start)
 		i++;
-	while (j < len)
-	{
-		ptr[j] = s[i];
-		j++;
-		i++;
-	}
+	// while (j < len)
+	// {
+	// 	ptr[j] = s[i];
+	// 	j++;
+	// 	i++;
+	// }
+	ft_strlcpy(ptr, (s + i), len + 1);
 	return (ptr);
 }
