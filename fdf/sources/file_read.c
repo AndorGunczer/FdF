@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 14:02:07 by agunczer          #+#    #+#             */
-/*   Updated: 2021/08/05 18:43:09 by agunczer         ###   ########.fr       */
+/*   Updated: 2021/08/06 15:00:56 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ t_list	*get_params(char *file_name, struct t_fdf *data, int *x, int *y) //works
 	lst = ft_lstnew("smtg");
 	if (lst_start->content)
 	{
-		int i = 0;
-		char **arr = ft_split(lst_start->content, ' ');
-		while (arr[i])
-		{
-			printf("%s\n", arr[i]);
-			i++;
-		}
-		printf("WIDTH: %d THE LAST ELEMENT: %s\n", i, arr[i - 1]);
+		// int i = 0;
+		// char **arr = ft_split(lst_start->content, ' ');
+		// while (arr[i])
+		// {
+		// 	// printf("%s\n", arr[i]);
+		// 	i++;
+		// }
+		// // printf("WIDTH: %d THE LAST ELEMENT: %s\n", i, arr[i - 1]);
 		*x = array_len(ft_split(lst_start->content, ' '));
 		(*y)++;
 	}
@@ -69,7 +69,7 @@ t_list	*get_params(char *file_name, struct t_fdf *data, int *x, int *y) //works
     	(*y)++;
     }
 	(*y)--; // the counter goes one more than intended, so Y-- is applied
-	printf("HEIGHT: %d | WIDTH: %d", data->height, data->width);
+	// printf("HEIGHT: %d | WIDTH: %d", data->height, data->width);
 	close(fd);
 	return (lst_start);
 }
