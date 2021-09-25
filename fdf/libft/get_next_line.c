@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 14:41:57 by agunczer          #+#    #+#             */
-/*   Updated: 2021/08/04 10:55:24 by agunczer         ###   ########.fr       */
+/*   Updated: 2021/09/21 15:22:39 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 #include "get_next_line.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+// static void	ft_putchar_fdr(char c, int fd)
+// {
+// 	write(fd, &c, 1);
+// }
+
+// static void	ft_putstr_fdr(char *s, int fd)
+// {
+// 	while (*s)
+// 	{
+// 		ft_putchar_fdr(*s, fd);
+// 		s++;
+// 	}
+// }
 
 static int	position_ofn(char *str, int i, int goal)
 {
@@ -42,20 +56,26 @@ static int	position_ofn(char *str, int i, int goal)
 		return (0);
 }
 
-static char	*output_int(char **str, char *result, int i)
+static char	*output_int(struct s_list *statics, char *result)
 {
-	if (str[0][i] == '\n')
+	if (statics->warehouse[statics->j] == '\n')
 		return (result);
-	else if (str[0][i] == '\0')
+	else if (statics->warehouse[statics->j] == '\0')
 	{
-		free(*str);
-		*str = 0;
+		free(statics->warehouse);
+		statics->warehouse = 0;
+		statics->i = 0;
+		statics->j = 0;
+		statics->custom = 0;
 		return (result);
 	}
 	else
 	{
-		free(*str);
-		*str = 0;
+		free(statics->warehouse);
+		statics->warehouse = 0;
+		statics->i = 0;
+		statics->j = 0;
+		statics->custom = 0;
 		return (NULL);
 	}
 }
@@ -86,6 +106,8 @@ static char	*reader(int fd, char *warehouse, int *readcount)
 
 	str = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
 	*readcount = read(fd, str, BUFFER_SIZE);
+	// if (*readcount > 0)
+	// {
 	if (*readcount == -1 || (*readcount == 0 && !warehouse))
 	{
 		free(str);
@@ -100,6 +122,9 @@ static char	*reader(int fd, char *warehouse, int *readcount)
 		free(temp);
 	if (!warehouse)
 		return (NULL);
+	// }
+	// else
+	// 	free(str);
 	return (warehouse);
 }
 
@@ -107,17 +132,20 @@ char	*get_next_line(int fd)
 {
 	static struct s_list	statics;
 	char					*result;
-	int						readcount;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	statics.warehouse = reader(fd, statics.warehouse, &readcount);
-	if (readcount == 0 && !statics.warehouse)
+	if (statics.readcount > 0 || statics.custom == 0)
+	{	
+		statics.warehouse = reader(fd, statics.warehouse, &statics.readcount);
+		statics.custom = 1;
+	}
+	if (statics.readcount == 0 && !statics.warehouse)
 		return (NULL);
 	if (!statics.warehouse)
 		return (NULL);
 	statics.j = position_ofn(statics.warehouse, statics.i, 1);
 	result = gnl_substr(statics.warehouse, statics.i, statics.j - statics.i + 1);
 	statics.i = statics.j + 1;
-	return (output_int(&statics.warehouse, result, statics.j));
+	return (output_int(&statics, result));
 }

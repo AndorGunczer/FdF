@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mem_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/24 14:50:09 by agunczer          #+#    #+#             */
-/*   Updated: 2021/09/25 15:01:14 by agunczer         ###   ########.fr       */
+/*   Created: 2021/09/24 15:55:13 by agunczer          #+#    #+#             */
+/*   Updated: 2021/09/25 13:16:03 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	main(int argc, char *argv[])
+int mem_free(struct s_fdf *data)
 {
-	static struct s_fdf	*data;
+	ft_custom_free(data, 1);
+	ft_custom_free(data, 2);
+	free(data->point_matrix);
+	free(data->radian_matrix);
+	free(data->base_points);
 
-	if (argc == 2)
-	{
-		data = ft_calloc(sizeof(struct s_fdf), 1);
-		set_matrix(data, argv[1]);
-		draw_conductor(data);
-		mem_free(data);
-	}
+	mlx_destroy_window(data->mlx, data->mlx_win);
+	free(data->img);
+	free(data->addr);
+	free(data->mlx);
 	return (0);
 }

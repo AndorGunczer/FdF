@@ -6,7 +6,7 @@
 /*   By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:33:44 by agunczer          #+#    #+#             */
-/*   Updated: 2021/08/09 15:56:52 by agunczer         ###   ########.fr       */
+/*   Updated: 2021/09/21 14:38:26 by agunczer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	numstring(char const *s1, char c) // numstring function bugged
 	{
 		if (*s1 == c)
 			cles = 0;
-		else if (cles == 0 && *s1 != '\n')
+		else if (cles == 0)
 		{
 			cles = 1;
 			comp++;

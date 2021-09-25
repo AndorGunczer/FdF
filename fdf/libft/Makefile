@@ -6,7 +6,7 @@
 #    By: agunczer <agunczer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/25 09:35:06 by agunczer          #+#    #+#              #
-#    Updated: 2021/08/05 18:21:36 by agunczer         ###   ########.fr        #
+#    Updated: 2021/09/13 12:57:36 by agunczer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,9 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c f
     ft_atoi.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_toupper.c \
     ft_tolower.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
     ft_itoa.c ft_strmapi.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-	ft_strlcatnils.c
-GNL = get_next_line.c get_next_line_utils.c
-BNS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
+	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 	ft_lstclear.c ft_lstiter.c ft_lstmap.c
+GNL = get_next_line.c get_next_line_utils.c
 OBJ = ${SRC:.c=.o}
 NAME = libft.a
 
@@ -33,7 +32,7 @@ ${NAME}: ${SRC}
 	ar -rc libft.a ${OBJ}
 
 gnl:
-	${CC} ${CC_FLAGS} -D BUFFER_SIZE=1 -c ${GNL}
+	${CC} ${CC_FLAGS} -D BUFFER_SIZE=1000000 -c ${GNL}
 	ar -rc libft.a *.o
 
 bonus:
